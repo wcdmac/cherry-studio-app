@@ -64,7 +64,10 @@ jobs:
       - name: Archive with code signing disabled
         run: |
           cd "$GITHUB_WORKSPACE"
-          WORKSPACE=$(ls ios/*.xcworkspace | head -n1)
+          WORKSPACE=$(ls -d ios/*.xcworkspace 2>/dev/null | head -n1)
+          if [ -z "$WORKSPACE" ]; then
+            echo "ERROR: no .xcworkspace found under ios/"; ls -la ios; exit 1
+          fi
           SCHEME=$(basename "$WORKSPACE" .xcworkspace)
           echo "Workspace: $WORKSPACE"
           echo "Scheme: $SCHEME"
