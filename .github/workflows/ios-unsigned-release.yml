@@ -21,6 +21,9 @@ env:
   EXPO_NO_TELEMETRY: "1"
   CI: "1"
   EAS_BUILD_IOS_BUILD_NUMBER: "1"
+  # CI 无 Sentry token：跳过 source maps 自动上传（DISABLE），且即使上传尝试失败也不阻断 archive（ALLOW_FAILURE）
+  SENTRY_DISABLE_AUTO_UPLOAD: "true"
+  SENTRY_ALLOW_FAILURE: "true"
 
 concurrency:
   group: ios-unsigned-${{ github.ref }}
